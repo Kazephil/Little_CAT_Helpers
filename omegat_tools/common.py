@@ -32,7 +32,7 @@ def set_basepath(configpath):
     # If not, use the user's 'Documents' folder if it exists,
     # and the user folder if not, as a default.
 
-    candidates = [configpath, DEFAULT_DOCHOME, USER_HOME]
+    candidates = [Path(configpath), DEFAULT_DOCHOME, USER_HOME]
     basepath = None
     
     # Read each candidate path in term, and set the first valid path
