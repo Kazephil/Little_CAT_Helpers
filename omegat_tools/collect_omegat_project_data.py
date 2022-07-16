@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
-'''
-Copy memory and glossary files from memory projects to another folder.
+'''Copy memory and glossary files from memory projects to another folder.
 
 A script to collect the "project_save.tmx" and "glossary.txt" files of
 OmegaT projects and copy them to a user-selected centralized location
@@ -35,37 +34,39 @@ files to match the name of the project.
 ###########################################################################
 
 import shutil
-import tkinter as tk
-from tkinter import filedialog
-from pathlib import Path
 
-# Constants
+import common
 
-# Default folder for Documents.
-# Set to user home if there is no 'Documents' folder
-DOCHOME = Path(Path.home()/'Documents')
-if not DOCHOME.exists():
-    DOCHOME = Path.home()
+def get_project_settings():
+    '''Load OmegaT project information from the configuration file'''
 
-PROJECT = 'omegat.project'
-MEMORY = 'omegat/project_save.tmx'
-GLOSSARY = 'glossary/glossary.txt'
+    project_settings = {'configpath':common.config['Paths']['projects'],
+                        'project_file':common.config['Files']['project_file'],
+                        'main_memory':common.config['Files']['main_memory'],
+                        'main_glossary':common.config['Files']['main_glossary']
+                       }
+
+    return project_settings
 
 
-def select_folder(path, title):
-    '''Present the user with a dialog to choose the folder they want to use.'''
+def set_projects_path():
+    '''Assign the default path of the OmegaT projects'''
 
-    rootWin = tk.Tk()
-    rootWin.attributes('-topmost', True)
-    rootWin.withdraw()
+    configpath = project_settings['configpath']
+    projects_path = common.set_basepath(configpath)
 
-    return filedialog.askdirectory(initialdir=path, title=title)
+    return projects_path
 
 
 def make_project_list(searchpath):
-    '''Build a list of all OmegaT projects in the search path,
-       excluding duplicate data in the ".repositories" folder of
-       team projects'''
+    '''Build a list of all OmegaT projects in the search path.
+       
+
+    The list excludes duplicate data in the ".repositories" folder
+    of team projects
+    '''
+
+    PROJECT = project_settings['project_file']
 
     # In team projects, the '.repositories' subfolder is two levels
     # above the 'omegat.project' file, hence the need for two 'parent'
@@ -79,29 +80,35 @@ def make_project_list(searchpath):
 def collate_project_data(projects):
     '''Get the project name and link it with the paths to its
        'project_save.tmx' and 'glossary.txt' files.'''
+    
+    MEMORY = common.Path(project_settings['main_memory'])
+    GLOSSARY = common.Path(project_settings['main_glossary'])
 
     project_data = {}
     for project in projects:
         # Retrieve the project name and the memory and glossary files
         project_name = project.stem
         
-        project_data[project_name] = (Path(project, MEMORY),
-                                       Path(project, GLOSSARY))
+        project_data[project_name] = (common.Path(project, MEMORY),
+                                      common.Path(project, GLOSSARY))
 
     return project_data
 
 
 def copy_project_data(project_data):
     '''Create a subfolder for each project in the destination folder.
-       Copy the corresponding memory and glossary files there, and
-       rename them to match the project name.'''
        
-    destination = Path(select_folder(DOCHOME, 'Select destination folder'))
+    Copy the corresponding memory and glossary files there, and
+    rename them to match the project name.
+    '''
+
+    title = 'Select destination folder'
+    destination = common.select_folder(projects_path, title)
        
     for name, data in project_data.items():
 
         # Create project subfolder
-        project_folder = Path(destination/name)
+        project_folder = common.Path(destination/name)
         project_folder.mkdir(parents=True, exist_ok=True)
 
         for data_file in data:
@@ -109,13 +116,17 @@ def copy_project_data(project_data):
             # Make sure the file is valid, give it the same name as the
             # project, and keep its original extension.
             if data_file.exists():
-                new_file = Path(project_folder, name+data_file.suffix)
+                new_file = common.Path(project_folder, name+data_file.suffix)
                 print('Copying '+str(data_file)+' to '+' '+str(new_file))
                 shutil.copy(data_file, new_file)
 
-if __name__ == '__main__':
-    projects_path = Path(select_folder(DOCHOME,
-                         'Select the folder to search for OmegaT projects'))
+if __name__ == '__main__':    
+
+    # Retrieve configuration information for OmegaT projects
+    project_settings = get_project_settings()
+    
+    askfolder = 'Select the folder to search for OmegaT projects'
+    projects_path = common.select_folder(set_projects_path(), askfolder)
                          
     projects = make_project_list(projects_path)
     project_data = collate_project_data(projects)
