@@ -16,7 +16,7 @@ files to match the name of the project.
 #
 # Collect OmegaT Project Data
 # ---------------------------
-# Version 0.2, released July 4, 2022
+# Version 0.3, released July 16, 2022
 # Author: Philippe Tourigny
 # License: GPL3+
 # https://www.gnu.org/licenses/gpl-3.0.en.html
