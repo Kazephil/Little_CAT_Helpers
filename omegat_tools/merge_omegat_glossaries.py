@@ -49,8 +49,8 @@ def get_glossary_settings():
 def set_base_glossary_path():
     '''Assign the default path for glossary files'''
 
-    config_path = Path(glossary_settings['configpath'])
-    candidates = [config_path, common.DEFAULT_DOCHOME, common.USER_HOME]
+    configpath = Path(glossary_settings['configpath'])
+    candidates = [configpath, common.DEFAULT_DOCHOME, common.USER_HOME]
     base_glossary_path = common.set_basepath(candidates)
 
     return base_glossary_path
