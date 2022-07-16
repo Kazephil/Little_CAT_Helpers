@@ -21,15 +21,22 @@ def read_config(configfile):
     return parser
 
 
-def set_basepath(candidates):
-    '''Define the default starting path for documents.'''
+def set_basepath(configpath):
+    '''Define the default starting path for documents.
+       
+       Each tool reads the applicable configuration path from the
+       configuration file and passes it to this function.    
+    '''
 
     # Give priority to path set in config file, if valid.
     # If not, use the user's 'Documents' folder if it exists,
     # and the user folder if not, as a default.
 
+    candidates = [configpath, DEFAULT_DOCHOME, USER_HOME]
     basepath = None
     
+    # Read each candidate path in term, and set the first valid path
+    # as the basepath
     while basepath is None:
         if candidates[0].exists():
             basepath = candidates[0]
