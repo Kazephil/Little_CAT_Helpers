@@ -30,7 +30,6 @@ Entries are considered duplicates if they have identical source and target terms
 ###########################################################################
 
 import csv
-from pathlib import Path
 
 import common
 
@@ -49,7 +48,7 @@ def get_glossary_settings():
 def set_base_glossary_path():
     '''Assign the default path for glossary files'''
 
-    configpath = Path(glossary_settings['configpath'])
+    configpath = glossary_settings['configpath']
     base_glossary_path = common.set_basepath(configpath)
 
     return base_glossary_path
