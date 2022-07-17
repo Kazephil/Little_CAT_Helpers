@@ -140,7 +140,7 @@ def write_glossary(glossary):
     merged_name = common.get_save_file_name(glossary_path,
                                             glossary_files,
                                             title)
-    merged_file = Path(glossary_path/merged_name)
+    merged_file = common.Path(glossary_path/merged_name)
 
     glossary_header=['# Glossary in tab-separated format -*- coding: utf-8 -*-']
 
