@@ -1,6 +1,6 @@
 # Little Tools for Working with OmegaT
 
-The scripts in this directory are described below. They use the `pathlib` module, and therefore require Python 3.4 or higher, but have only been tried on Python 3.10.
+The scripts in this directory are described below. They use the `pathlib` module, and therefore require Python 3.4 or higher, but have only been tried on Python 3.10. The scripts also share the limitation that symlinks to subfolders are not recognized.
 
 ## Collect OmegaT Project Data
 
@@ -23,7 +23,6 @@ Simply run the program from the command line or your favourite IDE. Select the f
 1. The default OmegaT project subfolder hierarchy is assumed. Projects that use different names or locations for the subfolders in the OmegaT project hierarchy will not be recognized.
 2. Glossaries other than the default "glossary.txt" file are not recognized or copied.
 3. The destination folder for the files must be exist before the script is run because the folder selection dialog does not offer an option to create a new directory.
-4. Symlinked subfolders are not recognized.
 
 ### Possible Improvements
 
@@ -32,6 +31,7 @@ Since I currently only use OmegaT on occasion for personal projects, progress on
 1. Copy other reference glossaries in addition to the default glossary file.
 2. Accommodate user-defined project structures directory names, and choice of files to copy.
 3. Allow users to create the destination directory from the folder selection dialog.
+4. Provide an option to copy the memories and glossaries to a central memory or glossary folder rather than to individual subfolders named after the project.
 
 ## Merge Glossaries
 
@@ -52,8 +52,12 @@ Upon executing the program, select the folder that contains the glossaries to me
 1. The script assumes that the input files all match the OmegaT text glossary format, namely "source term", "target term", and "notes" separated by tabs. Any files with more columns, a different column order, or other formatting differences are likely to produce strange and unpredictable results.
 2. Since the script is intended to produce an OmegaT glossary, the inclusion of the OmegaT glossary file header is hardcoded and can currently only be removed by updating the code.
 
-### Possible improvements
+### Possible Improvements
+
+I've listed a few random ideas below, lest I forget them later. I'm not entirely sure how I could implement the first one, and the last one should perhaps be a small separate script rather than an extension of this one.
 
 1. Check the files in the selected directory and only process those that are valid glossary-format files.
-2. Allow the user to choose whether to include the glossary header.
-3. Add options to sort the entries (by source, target, or entry length, for example) before writing the merged glossary file.
+2. Provide an option to search only specific subfolders
+3. Allow the user to choose whether to include the glossary header in the final file.
+4. Add options to sort the entries (by source, target, or entry length, for example) before writing the merged glossary file.
+5. Extend the concept to merge the _learned_words.txt_ and _ignored_words.txt_ files from multiple OmegaT projects.
