@@ -13,7 +13,3 @@ These scripts are provided as is. They have not been tested extensively, and are
 # License
 
 In the spirit of sharing and freedom fostered by [OmegaT](https://omegat.org/), which inspired the majority of the scripts here, all scripts in this repository are provided under the terms of the [GPL3+ license](https://www.gnu.org/licenses/gpl-3.0.en.html).
-
-# Little_CAT_Tools
-
-Scripts by a translator dabbing in programming to help with tasks related to handling files used CAT tools or to the translation process in general.
