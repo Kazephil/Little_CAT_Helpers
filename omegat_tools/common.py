@@ -58,10 +58,20 @@ def select_folder(basepath, title):
     '''Ask user to choose a folder.'''
 
     set_root_window()
-    folder = Path(filedialog.askdirectory(initialdir=basepath,
-                                          title=title))
+    selected_folder = Path(filedialog.askdirectory(initialdir=basepath,
+                                                   title=title))
 
-    return folder
+    return selected_folder
+
+
+def select_file(basepath, title):
+    '''Ask the user to select a single file'''
+
+    set_root_window()
+    selected_file = Path(filedialog.askopenfilename(initialdir=basepath,
+                                                     title=title))
+
+    return selected_file
 
 
 def get_save_file_name(basepath, filetypes, title):
