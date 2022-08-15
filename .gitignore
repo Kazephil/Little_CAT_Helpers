@@ -156,5 +156,5 @@ cython_debug/
 .code-workspace
 
 # Personal notes and testing area
-/development-notes
+/notes
 /testbed
