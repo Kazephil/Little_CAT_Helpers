@@ -16,6 +16,7 @@ def read_config(configfile):
     '''Load the configuration file'''
 
     parser = ConfigParser()
+    parser.optionxform = str
     parser.read(configfile, encoding='utf-8')
     
     return parser
@@ -35,7 +36,7 @@ def set_basepath(configpath):
     candidates = [Path(configpath), DEFAULT_DOCHOME, USER_HOME]
     basepath = None
     
-    # Read each candidate path in term, and set the first valid path
+    # Read each candidate path in turn, and set the first valid path
     # as the basepath
     while basepath is None:
         if candidates[0].exists():
@@ -64,12 +65,13 @@ def select_folder(basepath, title):
     return selected_folder
 
 
-def select_file(basepath, title):
+def select_file(basepath, filetype, title):
     '''Ask the user to select a single file'''
 
     set_root_window()
     selected_file = Path(filedialog.askopenfilename(initialdir=basepath,
-                                                     title=title))
+                                                    filetypes=filetype,
+                                                    title=title))
 
     return selected_file
 
