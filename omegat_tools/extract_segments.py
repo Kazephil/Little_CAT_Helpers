@@ -2,9 +2,13 @@
 
 '''Create per translator TMX files from a base TMX file.
 
-This script is used to parse TMX files from OmegaT projects involving more than one translator, and creates individual TMX files containing the translations made by each translator.
+This script is used to parse TMX files from OmegaT projects involving more than
+one translator, and creates individual TMX files containing the translations
+made by each translator.
 
-The user name of each translator and the name of the corresponding TMX file must be entered in the "Translators" section of the "omegat-tools.conf" file.
+The user name of each translator and the two letter code to identify that
+translator in the TMX file name must be entered in the "Translators" section
+of the "omegat-tools.conf" file.
 
 Requires:
   - Python 3.6 or higher (for f-strings)
