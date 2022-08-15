@@ -34,10 +34,6 @@ Requires:
 # project tm folder to show each translator's original translation immediately
 # below the source text during revision, for example.
 #
-# The script can also recognize revisers if they are defined in the
-# configuration file, and add a note to a segment to indicate that it has been
-# revised. The OmegaT option to apply coloring to segments with notes can
-# then be used to quickly identify which segments have been revised.
 #
 # TODO:
 #   - Automatically save the files to the "tmx2source" subfolder if a team
