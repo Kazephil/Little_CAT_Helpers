@@ -8,7 +8,7 @@ Descriptions of the individual scripts can, for the time being, be found in the 
 
 # Disclaimer
 
-These scripts are provided as is. They have not been tested extensively, and are not designed to handle unexpected inputs or errors. The author shall not take responsibility is the use of these scripts blows up your coffee machine or results in any other unforeseen or unintended consequences.
+These scripts are provided as is. They have not been tested extensively, and are not designed to handle unexpected inputs or errors. The author shall not take responsibility if the use of these scripts blows up your coffee machine or results in any other unforeseen or unintended consequences.
 
 # License
 
